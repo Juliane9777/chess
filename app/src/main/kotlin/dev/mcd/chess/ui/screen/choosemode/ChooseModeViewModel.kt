@@ -1,4 +1,5 @@
-package dev.mcd.chess.ui.screen.choosemode
+/*package dev.mcd.chess.ui.screen.choosemode
+
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -52,3 +53,4 @@ class ChooseModeViewModel @Inject constructor(
         data class NavigateToExistingGame(val id: GameId) : SideEffect
     }
 }
+*/

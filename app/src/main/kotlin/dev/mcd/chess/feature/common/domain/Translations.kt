@@ -3,6 +3,8 @@ package dev.mcd.chess.feature.common.domain
 interface Translations {
     val pgnSiteName: String
     val playerYou: String
+    val playerOne: String
+    val playerTwo: String
     val pgnBotName: String
     val pgnOnlineGame: String
     val pgnAnalysis: String

@@ -12,6 +12,7 @@ import dev.mcd.chess.ui.screen.botselection.BotSelectionScreen
 import dev.mcd.chess.ui.screen.choosemode.ChooseModeScreen
 import dev.mcd.chess.ui.screen.onlinegame.OnlineGameScreen
 import dev.mcd.chess.ui.screen.settings.SettingsScreen
+import dev.mcd.chess.ui.screen.offlinegame.OfflineGameScreen
 
 @Composable
 fun Routing() {
@@ -19,11 +20,12 @@ fun Routing() {
     NavHost(navController, "/choosemode") {
         composable("/choosemode") {
             ChooseModeScreen(
-                onPlayOnline = { navController.navigate("/game/online") },
+                //onPlayOnline = { navController.navigate("/game/online") },
+                onPlayOffline = { navController.navigate("/game/offline") },
                 onPlayBot = { navController.navigate("/selectbot") },
                 onSolvePuzzle = { navController.navigate("/puzzle") },
                 onNavigateSettings = { navController.navigate("/settings") },
-                onNavigateExistingGame = { navController.navigate("/game/online?gameId=$it") },
+                //onNavigateExistingGame = { navController.navigate("/game/online?gameId=$it") },
             )
         }
         composable("/selectbot") {
@@ -53,6 +55,11 @@ fun Routing() {
             ),
         ) {
             OnlineGameScreen {
+                navController.popBackStack()
+            }
+        }
+        composable("/game/offline") {
+            OfflineGameScreen {
                 navController.popBackStack()
             }
         }

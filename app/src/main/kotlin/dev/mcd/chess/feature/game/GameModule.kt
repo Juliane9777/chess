@@ -15,6 +15,8 @@ import dev.mcd.chess.feature.puzzle.data.usecase.GetPuzzleOptionsImpl
 import dev.mcd.chess.feature.puzzle.domain.usecase.CreatePuzzleSession
 import dev.mcd.chess.feature.puzzle.domain.usecase.GetPuzzleOptions
 import javax.inject.Singleton
+import dev.mcd.chess.feature.game.data.usecase.StartOfflineGameImpl
+import dev.mcd.chess.feature.game.domain.usecase.StartOfflineGame
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -25,6 +27,8 @@ abstract class GameModule {
 
     @Binds
     abstract fun startBotGame(impl: StartBotGameImpl): StartBotGame
+    @Binds
+    abstract fun startOfflineGame(impl: StartOfflineGameImpl): StartOfflineGame
 
     @Binds
     abstract fun moveForBot(impl: MoveForBotImpl): MoveForBot
