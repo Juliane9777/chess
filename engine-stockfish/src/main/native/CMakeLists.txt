@@ -7,6 +7,8 @@ add_compile_definitions(NNUE_EMBEDDING_OFF)
 
 file(GLOB_RECURSE stockfishCppPaths stockfish/src/*.cpp)
 file(GLOB_RECURSE bridgeCppPaths bridge/*.cpp)
+message(STATUS "Stockfish CPP: ${stockfishCppPaths}")
+message(STATUS "Bridge CPP: ${bridgeCppPaths}")
 
 add_library(
         stockfish

@@ -15,7 +15,7 @@ import dev.mcd.chess.online.domain.AuthStore
 import dev.mcd.chess.online.domain.EndpointProvider
 import kotlinx.coroutines.runBlocking
 import javax.inject.Singleton
-
+//Comment
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class CommonModule {

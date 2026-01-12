@@ -37,6 +37,8 @@ Java_dev_mcd_chess_engine_stockfish_data_AndroidStockfishJni_main(JNIEnv *env, j
     dup2(CHILD_WRITE_FD, STDOUT_FILENO);
 
     std::cout << Stockfish::engine_info() << std::endl;
+    //Stockfish::engine_info()
+
 
     using namespace Stockfish;
 
