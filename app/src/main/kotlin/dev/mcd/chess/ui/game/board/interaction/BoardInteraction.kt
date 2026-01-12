@@ -17,6 +17,7 @@ import kotlin.math.sqrt
 
 class BoardInteraction(
     private val session: GameSession,
+    private val allowBothSides: Boolean = false,
 ) {
     private val perspective = MutableStateFlow(session.selfSide)
     private val moves = MutableSharedFlow<Move>(replay = 1, extraBufferCapacity = 1, onBufferOverflow = BufferOverflow.DROP_OLDEST)
@@ -103,7 +104,7 @@ class BoardInteraction(
 
             var result: DropPieceResult = DropPieceResult.None
 
-            if (session.selfSide == piece.pieceSide) {
+            if (allowBothSides || session.selfSide == piece.pieceSide) {
                 val move = Move(square, target.value)
                 val promotions = session.promotions(move)
 

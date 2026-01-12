@@ -34,7 +34,9 @@ fun GameView(
 ) {
     val (game) = gameHolder
     val sessionManager = LocalGameSession.current
-    val boardInteraction = remember(game.id) { BoardInteraction(game) }
+    val boardInteraction = remember(game.id, settings.allowBothSides) {
+        BoardInteraction(game, allowBothSides = settings.allowBothSides)
+    }
 
     LaunchedEffect(game) {
         Timber.d("Game ID: ${game.id}")

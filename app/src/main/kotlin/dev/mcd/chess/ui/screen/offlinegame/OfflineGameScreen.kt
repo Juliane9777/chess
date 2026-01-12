@@ -72,7 +72,7 @@ fun OfflineGameScreen(
                     GameView(
                         gameHolder = s.gameHolder,
                         onMove = viewModel::onPlayerMove,
-                        settings = GameSettings(allowResign = false),
+                        settings = GameSettings(allowResign = false, allowBothSides = true),
                     )
                 }
                 is Loading -> Unit
