@@ -4,6 +4,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import dev.mcd.chess.online.data.ChessApiImpl
 import dev.mcd.chess.online.data.usecase.FindGameImpl
@@ -30,6 +31,8 @@ import io.ktor.client.plugins.websocket.WebSockets
 import io.ktor.serialization.kotlinx.json.json
 import javax.inject.Singleton
 import io.ktor.client.plugins.logging.Logger as KtorLogger
+import android.content.Context
+import dev.mcd.chess.online.data.puzzle.PuzzleCsvStore
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -63,6 +66,11 @@ abstract class OnlineModule {
             apiUrl = endpointProvider(),
             client = client,
         )
+        @Provides
+        @Singleton
+        internal fun puzzleCsvStore(
+            @ApplicationContext context: Context,
+        ): PuzzleCsvStore = PuzzleCsvStore(context)
 
         @Provides
         @Singleton
