@@ -9,7 +9,7 @@
     <string name="target_highlight_desc">Target Highlight</string>
     <string name="default_player_image_desc">player image</string>
     <string name="play_computer">Play Computer</string>
-    <string name="play_online">Play Online</string>
+    <string name="play_offline">Play Offline</string>
     <string name="solve_puzzle">Solve Puzzle</string>
     <string name="waiting">%1$s waiting</string>
     <string name="playing_as">Playing as %1$s</string>
@@ -35,6 +35,8 @@
     <string name="flip_board">Flip board</string>
     <string name="copy_pgn">Copy Game PGN</string>
     <string name="player_you">You</string>
+    <string name="player_one">Player 1</string>
+    <string name="player_two">Player 2</string>
     <string name="player_puzzle">Puzzle %s</string>
     <string name="set_color_scheme">Colour scheme</string>
     <string name="color_scheme_blue">Blue</string>

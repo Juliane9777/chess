@@ -11,6 +11,12 @@ class TranslationsImpl @Inject constructor(@ApplicationContext private val conte
     override val playerYou: String
         get() = context.getString(R.string.player_you)
 
+    override val playerOne: String
+        get() = context.getString(R.string.player_one)
+
+    override val playerTwo: String
+        get() = context.getString(R.string.player_two)
+
     override val pgnSiteName: String
         get() = context.getString(R.string.pgn_site_name)
 

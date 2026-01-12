@@ -6,10 +6,12 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dev.mcd.chess.feature.game.data.GameSessionRepositoryImpl
 import dev.mcd.chess.feature.game.data.usecase.StartBotGameImpl
+import dev.mcd.chess.feature.game.data.usecase.StartOfflineGameImpl
 import dev.mcd.chess.feature.game.domain.GameSessionRepository
 import dev.mcd.chess.feature.game.domain.usecase.MoveForBot
 import dev.mcd.chess.feature.game.domain.usecase.MoveForBotImpl
 import dev.mcd.chess.feature.game.domain.usecase.StartBotGame
+import dev.mcd.chess.feature.game.domain.usecase.StartOfflineGame
 import dev.mcd.chess.feature.puzzle.data.usecase.CreatePuzzleSessionImpl
 import dev.mcd.chess.feature.puzzle.data.usecase.GetPuzzleOptionsImpl
 import dev.mcd.chess.feature.puzzle.domain.usecase.CreatePuzzleSession
@@ -25,6 +27,9 @@ abstract class GameModule {
 
     @Binds
     abstract fun startBotGame(impl: StartBotGameImpl): StartBotGame
+
+    @Binds
+    abstract fun startOfflineGame(impl: StartOfflineGameImpl): StartOfflineGame
 
     @Binds
     abstract fun moveForBot(impl: MoveForBotImpl): MoveForBot
