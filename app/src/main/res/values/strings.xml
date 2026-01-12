@@ -37,6 +37,10 @@
     <string name="player_you">You</string>
     <string name="player_puzzle">Puzzle %s</string>
     <string name="set_color_scheme">Colour scheme</string>
+    <string name="color_scheme_blue">Blue</string>
+    <string name="color_scheme_brown">Brown</string>
+    <string name="color_scheme_green">Green</string>
+    <string name="color_scheme_gray">Gray</string>
     <string name="correct">Correct</string>
     <string name="incorrect">Incorrect</string>
     <string name="finding_puzzle">Finding Puzzle</string>
