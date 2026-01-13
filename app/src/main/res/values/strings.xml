@@ -28,9 +28,6 @@
     <string name="sign_in">Sign in</string>
     <string name="invalid_credentials">Invalid username or password.</string>
     <string name="login_test_accounts">Test accounts: admin/admin and user/user</string>
-    <string name="logout">Log out</string>
-    <string name="game_history">Game History</string>
-    <string name="game_moves_title">Game moves (PGN)</string>
     <string name="game_history">Game History</string>
     <string name="no_games_yet">No games saved yet.</string>
     <string name="all_games">All games</string>
