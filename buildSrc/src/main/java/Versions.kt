@@ -25,6 +25,7 @@ object Versions {
     val mockk = "1.13.4"
     val navigationCompose = "2.5.3"
     val orbit = "4.6.1"
+    val room = "2.5.2"
     val slf4j = "2.0.7"
     val testRunner = "1.5.2"
     val timber = "5.0.1"
