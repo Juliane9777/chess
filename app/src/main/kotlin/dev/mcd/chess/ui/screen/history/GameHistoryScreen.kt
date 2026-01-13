@@ -1,23 +1,16 @@
 package dev.mcd.chess.ui.screen.history
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.text.selection.SelectionContainer
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
-import androidx.compose.material.icons.rounded.ContentCopy
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -25,16 +18,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
-import androidx.compose.material3.TopAppBar
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalClipboardManager
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -58,8 +41,6 @@ fun GameHistoryScreen(
     onNavigateBack: () -> Unit,
 ) {
     val state by viewModel.collectAsState()
-    val clipboardManager = LocalClipboardManager.current
-    val selectedGame = remember { mutableStateOf<SavedGame?>(null) }
 
     Scaffold(
         topBar = {
@@ -98,44 +79,6 @@ fun GameHistoryScreen(
                         GameList(
                             games = current.games,
                             showUsername = current.user.role == UserRole.ADMIN,
-                            onGameSelected = { selectedGame.value = it },
-                        )
-                    }
-                }
-            }
-        }
-    }
-
-    selectedGame.value?.let { game ->
-        AlertDialog(
-            onDismissRequest = { selectedGame.value = null },
-            title = { Text(text = stringResource(R.string.game_moves_title)) },
-            text = {
-                SelectionContainer {
-                    Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
-                        Text(text = game.pgn, style = MaterialTheme.typography.bodySmall)
-                    }
-                }
-            },
-            confirmButton = {
-                TextButton(
-                    onClick = { clipboardManager.setText(AnnotatedString(game.pgn)) },
-                ) {
-                    Icon(
-                        imageVector = Icons.Rounded.ContentCopy,
-                        contentDescription = stringResource(R.string.copy_pgn),
-                    )
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Text(text = stringResource(R.string.copy_pgn))
-                }
-            },
-            dismissButton = {
-                TextButton(onClick = { selectedGame.value = null }) {
-                    Text(text = stringResource(R.string.dismiss))
-                }
-            },
-        )
-    }
                         )
                     }
                 }
@@ -148,15 +91,6 @@ fun GameHistoryScreen(
 private fun GameList(
     games: List<SavedGame>,
     showUsername: Boolean,
-    onGameSelected: (SavedGame) -> Unit,
-) {
-    LazyColumn(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        items(games, key = { it.id }) { game ->
-            GameCard(
-                game = game,
-                showUsername = showUsername,
-                onClick = { onGameSelected(game) },
-            )
 ) {
     LazyColumn(verticalArrangement = Arrangement.spacedBy(12.dp)) {
         items(games, key = { it.id }) { game ->
@@ -169,15 +103,6 @@ private fun GameList(
 private fun GameCard(
     game: SavedGame,
     showUsername: Boolean,
-    onClick: () -> Unit,
-) {
-    val date = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT)
-        .format(Date(game.createdAt))
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable { onClick() },
-    ) {
 ) {
     val date = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT)
         .format(Date(game.createdAt))

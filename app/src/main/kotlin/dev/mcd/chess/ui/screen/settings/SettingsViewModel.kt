@@ -5,12 +5,10 @@ import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.mcd.chess.BuildConfig
 import dev.mcd.chess.feature.common.domain.AppColorScheme
-import dev.mcd.chess.feature.auth.domain.SessionManager
 import dev.mcd.chess.feature.common.domain.AppPreferences
 import dev.mcd.chess.feature.common.domain.Environment
 import org.orbitmvi.orbit.ContainerHost
 import org.orbitmvi.orbit.syntax.simple.intent
-import org.orbitmvi.orbit.syntax.simple.postSideEffect
 import org.orbitmvi.orbit.syntax.simple.reduce
 import org.orbitmvi.orbit.viewmodel.container
 import javax.inject.Inject
@@ -19,7 +17,6 @@ import javax.inject.Inject
 class SettingsViewModel @Inject constructor(
     private val appPreferences: AppPreferences,
     private val environment: Environment,
-    private val sessionManager: SessionManager,
 ) : ViewModel(), ContainerHost<SettingsViewModel.State, SettingsViewModel.SideEffect> {
 
     override val container = container<State, SideEffect>(State()) {
@@ -78,16 +75,7 @@ class SettingsViewModel @Inject constructor(
         }
     }
 
-    fun logout() {
-        intent {
-            sessionManager.logout()
-            postSideEffect(SideEffect.LoggedOut)
-        }
-    }
-
-    sealed interface SideEffect {
-        object LoggedOut : SideEffect
-    }
+    object SideEffect
 
     @Stable
     data class State(

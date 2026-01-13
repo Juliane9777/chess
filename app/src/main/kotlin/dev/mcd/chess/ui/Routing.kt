@@ -79,17 +79,7 @@ fun Routing() {
             PuzzleScreen()
         }
         composable("/settings") {
-            SettingsScreen(
-                onDismiss = { navController.popBackStack() },
-                onLogout = {
-                    navController.navigate("/login") {
-                        popUpTo("/login") { inclusive = true }
-                    }
-                },
-            )
-        }
-        composable("/history") {
-            GameHistoryScreen {
+            SettingsScreen {
                 navController.popBackStack()
             }
         }
