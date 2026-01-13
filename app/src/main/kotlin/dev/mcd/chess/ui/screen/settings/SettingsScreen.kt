@@ -29,13 +29,22 @@ import dev.mcd.chess.R
 import dev.mcd.chess.ui.settings.BoardSettings
 import dev.mcd.chess.ui.settings.ColorSchemeSelection
 import dev.mcd.chess.ui.settings.DebugSettings
+import dev.mcd.chess.ui.screen.settings.SettingsViewModel.SideEffect.LoggedOut
 import org.orbitmvi.orbit.compose.collectAsState
+import org.orbitmvi.orbit.compose.collectSideEffect
 
 @Composable
 fun SettingsScreen(
     viewModel: SettingsViewModel = hiltViewModel(),
     onDismiss: () -> Unit,
+    onLogout: () -> Unit,
 ) {
+    viewModel.collectSideEffect { effect ->
+        when (effect) {
+            LoggedOut -> onLogout()
+        }
+    }
+
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -77,9 +86,7 @@ fun SettingsScreen(
                     modifier = Modifier
                         .padding(24.dp)
                         .fillMaxWidth(),
-                    debugModel = state.debugModel,
-                    onUpdateHost = { viewModel.setHost(it) },
-                    onClearAuthData = { viewModel.clearAuthData() },
+                    onLogout = { viewModel.logout() },
                 )
             }
         }
