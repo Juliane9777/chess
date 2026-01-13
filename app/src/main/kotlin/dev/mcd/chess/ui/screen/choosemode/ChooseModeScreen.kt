@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Extension
+import androidx.compose.material.icons.rounded.History
 import androidx.compose.material.icons.rounded.Memory
 import androidx.compose.material.icons.rounded.PersonSearch
 import androidx.compose.material.icons.rounded.Settings
@@ -43,6 +44,7 @@ fun ChooseModeScreen(
     onPlayOffline: () -> Unit,
     onPlayBot: () -> Unit,
     onSolvePuzzle: () -> Unit,
+    onViewHistory: () -> Unit,
     onNavigateSettings: () -> Unit,
     //onNavigateExistingGame: (GameId) -> Unit,
     //viewModel: ChooseModeViewModel = hiltViewModel(),
@@ -90,6 +92,8 @@ fun ChooseModeScreen(
                 PlayComputerButton(onClick = onPlayBot)
                 Spacer(modifier = Modifier.height(24.dp))
                 SolvePuzzleButton(onClick = onSolvePuzzle)
+                Spacer(modifier = Modifier.height(24.dp))
+                GameHistoryButton(onClick = onViewHistory)
             }
         }
     }
@@ -145,6 +149,34 @@ private fun SolvePuzzleButton(
             Spacer(modifier = Modifier.width(24.dp))
             Text(
                 text = stringResource(id = R.string.solve_puzzle),
+                style = MaterialTheme.typography.titleMedium,
+            )
+        }
+    }
+}
+
+@Composable
+private fun GameHistoryButton(
+    onClick: () -> Unit,
+) {
+    ElevatedCard(
+        modifier = Modifier.fillMaxWidth(),
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable { onClick() }
+                .padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Icon(
+                modifier = Modifier.size(42.dp),
+                painter = rememberVectorPainter(image = Icons.Rounded.History),
+                contentDescription = stringResource(R.string.game_history),
+            )
+            Spacer(modifier = Modifier.width(24.dp))
+            Text(
+                text = stringResource(id = R.string.game_history),
                 style = MaterialTheme.typography.titleMedium,
             )
         }
