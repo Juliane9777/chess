@@ -31,6 +31,7 @@
     <string name="logout">Log out</string>
     <string name="game_history">Game History</string>
     <string name="game_moves_title">Game moves (PGN)</string>
+    <string name="game_history">Game History</string>
     <string name="no_games_yet">No games saved yet.</string>
     <string name="all_games">All games</string>
     <string name="my_games">My games</string>

@@ -35,6 +35,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.material3.TopAppBar
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import dev.mcd.chess.R
@@ -131,6 +136,12 @@ fun GameHistoryScreen(
             },
         )
     }
+                        )
+                    }
+                }
+            }
+        }
+    }
 }
 
 @Composable
@@ -146,6 +157,10 @@ private fun GameList(
                 showUsername = showUsername,
                 onClick = { onGameSelected(game) },
             )
+) {
+    LazyColumn(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+        items(games, key = { it.id }) { game ->
+            GameCard(game = game, showUsername = showUsername)
         }
     }
 }
@@ -163,6 +178,10 @@ private fun GameCard(
             .fillMaxWidth()
             .clickable { onClick() },
     ) {
+) {
+    val date = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT)
+        .format(Date(game.createdAt))
+    Card(modifier = Modifier.fillMaxWidth()) {
         Column(modifier = Modifier.padding(16.dp)) {
             Text(
                 text = gameResultLabel(game.result),

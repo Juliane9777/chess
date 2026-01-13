@@ -93,5 +93,10 @@ fun Routing() {
                 navController.popBackStack()
             }
         }
+        composable("/history") {
+            GameHistoryScreen {
+                navController.popBackStack()
+            }
+        }
     }
 }
