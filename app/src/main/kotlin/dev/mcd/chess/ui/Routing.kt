@@ -10,6 +10,8 @@ import dev.mcd.chess.ui.puzzle.PuzzleScreen
 import dev.mcd.chess.ui.screen.botgame.BotGameScreen
 import dev.mcd.chess.ui.screen.botselection.BotSelectionScreen
 import dev.mcd.chess.ui.screen.choosemode.ChooseModeScreen
+import dev.mcd.chess.ui.screen.history.GameHistoryScreen
+import dev.mcd.chess.ui.screen.login.LoginScreen
 import dev.mcd.chess.ui.screen.onlinegame.OnlineGameScreen
 import dev.mcd.chess.ui.screen.settings.SettingsScreen
 import dev.mcd.chess.ui.screen.offlinegame.OfflineGameScreen
@@ -17,13 +19,23 @@ import dev.mcd.chess.ui.screen.offlinegame.OfflineGameScreen
 @Composable
 fun Routing() {
     val navController = rememberNavController()
-    NavHost(navController, "/choosemode") {
+    NavHost(navController, "/login") {
+        composable("/login") {
+            LoginScreen(
+                onLoginSuccess = {
+                    navController.navigate("/choosemode") {
+                        popUpTo("/login") { inclusive = true }
+                    }
+                },
+            )
+        }
         composable("/choosemode") {
             ChooseModeScreen(
                 //onPlayOnline = { navController.navigate("/game/online") },
                 onPlayOffline = { navController.navigate("/game/offline") },
                 onPlayBot = { navController.navigate("/selectbot") },
                 onSolvePuzzle = { navController.navigate("/puzzle") },
+                onViewHistory = { navController.navigate("/history") },
                 onNavigateSettings = { navController.navigate("/settings") },
                 //onNavigateExistingGame = { navController.navigate("/game/online?gameId=$it") },
             )
@@ -68,6 +80,11 @@ fun Routing() {
         }
         composable("/settings") {
             SettingsScreen {
+                navController.popBackStack()
+            }
+        }
+        composable("/history") {
+            GameHistoryScreen {
                 navController.popBackStack()
             }
         }

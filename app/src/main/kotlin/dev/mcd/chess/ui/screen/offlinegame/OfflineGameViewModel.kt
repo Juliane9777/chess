@@ -10,8 +10,12 @@ import dev.mcd.chess.common.game.GameSession
 import dev.mcd.chess.common.game.MoveResult
 import dev.mcd.chess.common.game.TerminationReason
 import dev.mcd.chess.feature.common.domain.AppPreferences
+import dev.mcd.chess.feature.auth.domain.SessionManager
 import dev.mcd.chess.feature.game.domain.GameSessionRepository
 import dev.mcd.chess.feature.game.domain.usecase.StartOfflineGame
+import dev.mcd.chess.feature.history.domain.GameMode
+import dev.mcd.chess.feature.history.domain.GameResult
+import dev.mcd.chess.feature.history.domain.SaveGame
 import dev.mcd.chess.feature.share.domain.CopySessionPGNToClipboard
 import dev.mcd.chess.feature.sound.domain.GameSessionSoundWrapper
 import dev.mcd.chess.feature.sound.domain.SoundSettings
@@ -34,6 +38,8 @@ class OfflineGameViewModel @Inject constructor(
     private val soundWrapper: GameSessionSoundWrapper,
     private val appPreferences: AppPreferences,
     private val copyPGN: CopySessionPGNToClipboard,
+    private val sessionManager: SessionManager,
+    private val saveGame: SaveGame,
 ) : ViewModel(), ContainerHost<OfflineGameViewModel.State, OfflineGameViewModel.SideEffect> {
 
     override val container = container<State, SideEffect>(State.Loading) {
@@ -98,6 +104,21 @@ class OfflineGameViewModel @Inject constructor(
 
     private fun handleTermination(reason: TerminationReason) {
         intent {
+            val user = sessionManager.currentUser.value
+            val session = gameSessionRepository.activeGame().value
+            if (user != null && session != null) {
+                runCatching {
+                    saveGame(
+                        session = session,
+                        userId = user.id,
+                        username = user.username,
+                        mode = GameMode.OFFLINE,
+                        result = GameResult.fromTermination(reason),
+                    )
+                }.onFailure { error ->
+                    Timber.e(error, "Failed to save game history")
+                }
+            }
             postSideEffect(
                 SideEffect.AnnounceTermination(
                     sideMated = reason.sideMated,

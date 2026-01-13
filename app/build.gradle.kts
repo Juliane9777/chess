@@ -135,6 +135,9 @@ dependencies {
         implementation("com.github.bhlangonijr:chesslib:$chessLib")
         implementation("com.jakewharton.timber:timber:$timber")
         implementation("androidx.datastore:datastore-preferences:$datastorePreferences")
+        implementation("androidx.room:room-runtime:$room")
+        implementation("androidx.room:room-ktx:$room")
+        kapt("androidx.room:room-compiler:$room")
 
         testImplementation("io.kotest:kotest-assertions-core:$kotest")
         testImplementation("io.kotest:kotest-runner-junit5:$kotest")
